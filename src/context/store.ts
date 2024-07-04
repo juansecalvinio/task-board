@@ -15,7 +15,7 @@ export interface Store {
   taskToDelete: string;
   addTask: (task: Task) => void;
   deleteTask: (id: string) => void;
-  setDraggedTask: (id: string | undefined | null) => void;
+  setDraggedTask: (id: string | null) => void;
   moveTask: (id: string, state: string) => void;
   setIsModalNewTaskOpen: (isModalNewTaskOpen: boolean) => void;
   setIsModalDeleteTaskOpen: (isModalDeleteTaskOpen: boolean) => void;
@@ -42,7 +42,7 @@ export const useStore = create(
       moveTask: (id, state) =>
         set((store) => ({
           tasks: store.tasks.map((task) =>
-            task.id === id ? { ...task, id, state } : task
+            task.id === id ? { ...task, state } : task
           ),
         })),
       setIsModalNewTaskOpen: (isModalNewTaskOpen) =>
